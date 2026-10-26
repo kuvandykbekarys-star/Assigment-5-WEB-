@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11131d">
+    <meta name="description" content="A small JavaScript arcade demonstrating DOM updates, arrays, loops, functions, and accessible form validation.">
+    <title>JS Arcade — Assignment 5</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="task1.js" defer></script>
+    <script src="task2.js" defer></script>
+    <script src="task3.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="JS Arcade home">
+          <span class="brand-mark" aria-hidden="true">JS</span>
+          <span>tiny<span class="brand-accent">arcade</span></span>
+        </a>
+        <nav class="top-nav" aria-label="Main navigation">
+          <a href="#game">01 / Game</a>
+          <a href="#board">02 / Board</a>
+          <a href="#creator">03 / Creator</a>
+        </nav>
+        <span class="course-tag"><span class="status-dot"></span> Assignment 05</span>
+      </header>
+
+      <main id="home">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> JAVASCRIPT BASICS · DOM & EVENTS</p>
+            <h1 id="hero-title">Small projects.<br><span class="gradient-text">Real interaction.</span></h1>
+            <p class="hero-description">Three bite-size builds that turn JavaScript fundamentals into things you can actually play with.</p>
+            <a class="text-link" href="#game">Explore the projects <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="hero-sticker sticker-one">if / else</div>
+            <div class="hero-sticker sticker-two">[ ...data ]</div>
+            <div class="hero-sticker sticker-three">&lt;DOM&gt;</div>
+            <div class="hero-core"><span>JS</span><i>✳</i></div>
+          </div>
+          <div class="hero-index"><span>01</span><span class="index-rule"></span><span>03</span></div>
+        </section>
+
+        <section class="project-section game-section" id="game" aria-labelledby="game-title">
+          <div class="section-heading">
+            <div><p class="eyebrow"><span class="number-pill">01</span> VARIABLES · OPERATORS · CONDITIONS</p><h2 id="game-title">Higher or <span>lower?</span></h2></div>
+            <p class="section-note">A quick guessing game.<br>Trust your instinct.</p>
+          </div>
+          <div class="game-layout">
+            <div class="game-card surface-card">
+              <div class="card-topline"><span class="live-label"><span class="status-dot"></span> ROUND IN PLAY</span><span class="mono-label" id="round-label">ROUND 01</span></div>
+              <div class="guess-display">
+                <div class="guess-value-wrap"><span class="mini-label">CURRENT NUMBER</span><strong id="current-value" class="guess-value">—</strong></div>
+                <div class="guess-arrow" aria-hidden="true">↗</div>
+                <div class="guess-value-wrap next-value-wrap"><span class="mini-label">NEXT NUMBER</span><strong class="guess-value question-value">?</strong></div>
+              </div>
+              <p class="game-prompt" id="game-prompt">Will the next number be higher or lower?</p>
+              <div class="guess-actions">
+                <button class="button button-secondary" type="button" data-guess="lower"><span aria-hidden="true">↓</span> Lower</button>
+                <button class="button button-primary" type="button" data-guess="higher">Higher <span aria-hidden="true">↑</span></button>
+              </div>
+              <p class="sr-only" id="game-announcement" aria-live="polite" aria-atomic="true"></p>
+            </div>
+            <aside class="game-stats">
+              <div class="stat-card"><span class="mini-label">LIVES LEFT</span><div class="lives" id="lives" aria-label="3 lives">♥ ♥ ♥</div><div class="stat-caption">Three chances to make it count</div></div>
+              <div class="stat-card streak-card"><span class="mini-label">CURRENT STREAK</span><strong class="stat-number" id="streak">0</strong><div class="stat-caption">Correct guesses in a row</div></div>
+              <div class="stat-card best-card"><span class="mini-label">BEST STREAK</span><strong class="stat-number" id="best-streak">0</strong><div class="stat-caption">Your personal best</div></div>
+            </aside>
+          </div>
+          <div class="game-footer"><span class="game-message" id="game-message" role="status" aria-live="polite">Pick a direction to start the round.</span><button class="text-button" id="restart-game" type="button" hidden>Play again <span aria-hidden="true">↗</span></button></div>
+        </section>
+
+        <section class="project-section board-section" id="board" aria-labelledby="board-title">
+          <div class="section-heading">
+            <div><p class="eyebrow"><span class="number-pill">02</span> ARRAYS · LOOPS · FUNCTIONS · DOM</p><h2 id="board-title">A little less <span>to-do.</span></h2></div>
+            <p class="section-note">A tiny kanban for a<br>creative side quest.</p>
+          </div>
+          <div class="board-toolbar">
+            <div class="board-search"><label class="sr-only" for="task-search">Search tasks by title</label><span aria-hidden="true">⌕</span><input id="task-search" type="search" placeholder="Search tasks..." autocomplete="off"></div>
+            <div class="board-controls"><label class="sr-only" for="tag-filter">Filter tasks by tag</label><select id="tag-filter"><option value="all">All tags</option></select><button class="button button-quiet" id="sort-priority" type="button" aria-pressed="false">Priority <span aria-hidden="true">↕</span></button></div>
+          </div>
+          <div class="board-progress-row"><div class="progress-label"><span>PROJECT PROGRESS</span><strong id="progress-copy">0 of 0 complete</strong></div><div class="progress-track" role="progressbar" aria-label="Project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div></div>
+          <div class="kanban-board" id="kanban-board" aria-label="Task board">
+            <section class="kanban-column" data-status="todo" aria-labelledby="todo-heading"><header class="column-heading"><div><span class="column-dot todo-dot"></span><h3 id="todo-heading">To do</h3><span class="column-count" data-count="todo">0</span></div><span class="column-hint">UP NEXT</span></header><div class="card-list" data-list="todo"></div></section>
+            <section class="kanban-column in-progress-column" data-status="progress" aria-labelledby="progress-heading"><header class="column-heading"><div><span class="column-dot progress-dot"></span><h3 id="progress-heading">In progress</h3><span class="column-count" data-count="progress">0</span></div><span class="column-hint">MAX 3</span></header><div class="card-list" data-list="progress"></div></section>
+            <section class="kanban-column" data-status="done" aria-labelledby="done-heading"><header class="column-heading"><div><span class="column-dot done-dot"></span><h3 id="done-heading">Done</h3><span class="column-count" data-count="done">0</span></div><span class="column-hint">NICE WORK</span></header><div class="card-list" data-list="done"></div></section>
+          </div>
+          <p class="board-message" id="board-message" role="status" aria-live="polite"></p>
+          <div class="board-legend"><span><i class="legend-swatch high-swatch"></i> High priority</span><span><i class="legend-swatch medium-swatch"></i> Medium priority</span><span><i class="legend-swatch low-swatch"></i> Low priority</span><span class="legend-tip">Use the arrows to move a card between columns.</span></div>
+        </section>
+
+        <section class="project-section creator-section" id="creator" aria-labelledby="creator-title">
+          <div class="section-heading">
+            <div><p class="eyebrow"><span class="number-pill">03</span> EVENTS · FORM VALIDATION</p><h2 id="creator-title">Make your <span>main character.</span></h2></div>
+            <p class="section-note">Build a hero with a<br>little bit of balance.</p>
+          </div>
+          <div class="creator-layout">
+            <form class="creator-form surface-card" id="character-form" novalidate>
+              <div class="form-intro"><span class="form-step">CHARACTER DETAILS</span><span class="points-chip"><span id="points-used">0</span> / 20 POINTS</span></div>
+              <div class="form-summary" id="form-summary" role="status" aria-live="polite" tabindex="-1"></div>
+              <div class="form-grid">
+                <div class="field field-wide"><label for="character-name">Character name <span class="required-mark">*</span></label><input id="character-name" name="characterName" type="text" placeholder="e.g. Nova Starling" autocomplete="off" aria-describedby="name-error" required><small class="field-error" id="name-error"></small></div>
+                <div class="field"><label for="character-class">Class <span class="required-mark">*</span></label><select id="character-class" name="characterClass" aria-describedby="class-error" required><option value="">Choose a class</option><option value="mage">Mage</option><option value="ranger">Ranger</option><option value="guardian">Guardian</option></select><small class="field-error" id="class-error"></small></div>
+                <div class="field"><label for="character-color">Signature color</label><div class="color-control"><input id="character-color" name="characterColor" type="color" value="#9c83ff" aria-label="Choose signature color"><span id="color-value">#9C83FF</span></div></div>
+              </div>
+              <div class="skill-heading"><div><span class="form-step">SKILL POINTS</span><p>Spend exactly 20 points across your skills.</p></div><span class="mini-label">MIN 1 · MAX 10</span></div>
+              <div class="skill-grid">
+                <div class="field skill-field"><label for="skill-strength">Strength</label><input id="skill-strength" name="strength" type="number" min="1" max="10" value="5" aria-describedby="strength-error skill-points-error"><small class="field-error" id="strength-error"></small></div>
+                <div class="field skill-field"><label for="skill-agility">Agility</label><input id="skill-agility" name="agility" type="number" min="1" max="10" value="5" aria-describedby="agility-error skill-points-error"><small class="field-error" id="agility-error"></small></div>
+                <div class="field skill-field"><label for="skill-intelligence">Intelligence</label><input id="skill-intelligence" name="intelligence" type="number" min="1" max="10" value="5" aria-describedby="intelligence-error skill-points-error"><small class="field-error" id="intelligence-error"></small></div>
+                <div class="field skill-field"><label for="skill-charisma">Charisma</label><input id="skill-charisma" name="charisma" type="number" min="1" max="10" value="5" aria-describedby="charisma-error skill-points-error"><small class="field-error" id="charisma-error"></small></div>
+              </div>
+              <small class="field-error points-error" id="skill-points-error"></small>
+              <div class="form-bottom"><p class="form-note">* Required fields · At least 5 points in your class skill</p><button class="button button-primary submit-button" type="submit">Create character <span aria-hidden="true">↗</span></button></div>
+            </form>
+            <aside class="character-preview" aria-label="Live character preview">
+              <div class="preview-topline"><span class="mini-label">YOUR CHARACTER</span><span class="preview-live"><span class="status-dot"></span> LIVE PREVIEW</span></div>
+              <div class="preview-art" id="preview-art"><div class="preview-glow"></div><div class="avatar-orbit orbit-a"></div><div class="avatar-orbit orbit-b"></div><div class="avatar-silhouette" aria-hidden="true"><span class="avatar-star">✦</span><span class="avatar-body">✧</span></div><span class="preview-class-icon" id="preview-class-icon">✧</span></div>
+              <div class="preview-info"><span class="mini-label" id="preview-class-label">UNCLASSIFIED</span><h3 id="preview-name">Your hero<br>starts here</h3><p id="preview-tagline">A new adventure awaits.</p></div>
+              <div class="preview-stats"><div><span>STR</span><strong id="preview-strength">5</strong></div><div><span>AGI</span><strong id="preview-agility">5</strong></div><div><span>INT</span><strong id="preview-intelligence">5</strong></div><div><span>CHA</span><strong id="preview-charisma">5</strong></div></div>
+              <p class="preview-success" id="preview-success" role="status" aria-live="polite"></p>
+            </aside>
+          </div>
+          <details class="rules-details"><summary>Validation rules <span aria-hidden="true">＋</span></summary><div class="rules-table-wrap"><table class="rules-table"><thead><tr><th>Field</th><th>Rule</th><th>Valid example</th><th>Invalid example</th></tr></thead><tbody><tr><td>Character name</td><td>3–18 characters; unique (taken names are rejected)</td><td>Nova</td><td>Nova, if already taken</td></tr><tr><td>Class</td><td>Choose Mage, Ranger, or Guardian</td><td>Mage</td><td>No class selected</td></tr><tr><td>Class skill</td><td>Mage: INT ≥ 5; Ranger: AGI ≥ 5; Guardian: STR ≥ 5</td><td>Mage with INT 5</td><td>Mage with INT 4</td></tr><tr><td>Skill points</td><td>Each skill is 1–10; total must equal exactly 20</td><td>5 + 5 + 5 + 5</td><td>5 + 5 + 5 + 4</td></tr></tbody></table></div></details>
+        </section>
+      </main>
+
+      <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">JS</span><span>tiny<span class="brand-accent">arcade</span></span></a><p>Built with arrays, event listeners & a little curiosity.</p><span class="footer-year">JS BASICS · 2026</span></footer>
+    </div>
+  </body>
+</html>
